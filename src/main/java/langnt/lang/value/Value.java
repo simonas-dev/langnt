@@ -9,7 +9,7 @@ public class Value implements Comparable<Value> {
 
     public enum Values {
         BOOLEAN_TRUE("yes"),
-        BOOLEAN_FALSE("no"),
+        BOOLEAN_FALSE("yesnt"),
         EMPTY("empty"),
         VOID("void");
 
