@@ -5,7 +5,7 @@ import langnt.LangntParser;
 import langnt.lang.func.Func;
 import langnt.lang.value.Value;
 import langnt.lang.value.ReturnValue;
-import langnt.util.KebabException;
+import langnt.util.LangntException;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -48,7 +48,7 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
     public Value visitUnaryMinusExpression(LangntParser.UnaryMinusExpressionContext ctx) {
         Value v = this.visit(ctx.expression());
         if (!v.isNumber()) {
-            throw new KebabException(ctx);
+            throw new LangntException(ctx);
         }
         return new Value(-1 * v.asDouble());
     }
@@ -65,7 +65,7 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
 
         // Not expressions only allowed for booleans and nulls.
         if (!value.isBoolean() && !value.isEmpty()) {
-            throw new KebabException(ctx);
+            throw new LangntException(ctx);
         }
         return new Value(!value.asBoolean());
     }
@@ -78,7 +78,7 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
         if (lhs.isNumber() && rhs.isNumber()) {
             return new Value(Math.pow(lhs.asDouble(), rhs.asDouble()));
         }
-        throw new KebabException(ctx);
+        throw new LangntException(ctx);
     }
 
     // expression '*' expression                #multiplyExpression
@@ -88,7 +88,7 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
         Value rhs = this.visit(ctx.expression(1));
         if (lhs == null || rhs == null) {
             System.err.println("lhs " + lhs + " rhs " + rhs);
-            throw new KebabException(ctx);
+            throw new LangntException(ctx);
         }
 
         // number * number
@@ -115,7 +115,7 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
             }
             return new Value(total);
         }
-        throw new KebabException(ctx);
+        throw new LangntException(ctx);
     }
 
     // list: '[' exprList? ']'
@@ -138,7 +138,7 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
         if (lhs.isNumber() && rhs.isNumber()) {
             return new Value(lhs.asDouble() / rhs.asDouble());
         }
-        throw new KebabException(ctx);
+        throw new LangntException(ctx);
     }
 
     // expression '%' expression                #modulusExpression
@@ -149,7 +149,7 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
         if (lhs.isNumber() && rhs.isNumber()) {
             return new Value(lhs.asDouble() % rhs.asDouble());
         }
-        throw new KebabException(ctx);
+        throw new LangntException(ctx);
     }
 
     // expression '+' expression                #addExpression
@@ -159,7 +159,7 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
         Value rhs = this.visit(ctx.expression(1));
 
         if (lhs == null || rhs == null) {
-            throw new KebabException(ctx);
+            throw new LangntException(ctx);
         }
 
         // number + number
@@ -200,7 +200,7 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
             list.remove(rhs);
             return new Value(list);
         }
-        throw new KebabException(ctx);
+        throw new LangntException(ctx);
     }
 
     // expression '>=' expression               #gtEqExpression
@@ -214,7 +214,7 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
         if (lhs.isString() && rhs.isString()) {
             return new Value(lhs.asString().compareTo(rhs.asString()) >= 0);
         }
-        throw new KebabException(ctx);
+        throw new LangntException(ctx);
     }
 
     // expression '<=' expression               #ltEqExpression
@@ -228,7 +228,7 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
         if (lhs.isString() && rhs.isString()) {
             return new Value(lhs.asString().compareTo(rhs.asString()) <= 0);
         }
-        throw new KebabException(ctx);
+        throw new LangntException(ctx);
     }
 
     // expression '>' expression                #gtExpression
@@ -242,7 +242,7 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
         if (lhs.isString() && rhs.isString()) {
             return new Value(lhs.asString().compareTo(rhs.asString()) > 0);
         }
-        throw new KebabException(ctx);
+        throw new LangntException(ctx);
     }
 
     // expression '<' expression                #ltExpression
@@ -256,7 +256,7 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
         if (lhs.isString() && rhs.isString()) {
             return new Value(lhs.asString().compareTo(rhs.asString()) < 0);
         }
-        throw new KebabException(ctx);
+        throw new LangntException(ctx);
     }
 
     // expression '==' expression               #eqExpression
@@ -265,7 +265,7 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
         Value lhs = this.visit(ctx.expression(0));
         Value rhs = this.visit(ctx.expression(1));
         if (lhs == null) {
-            throw new KebabException(ctx);
+            throw new LangntException(ctx);
         }
         return new Value(lhs.equals(rhs));
     }
@@ -285,7 +285,7 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
         Value rhs = this.visit(ctx.expression(1));
 
         if (!lhs.isBoolean() || !rhs.isBoolean()) {
-            throw new KebabException(ctx);
+            throw new LangntException(ctx);
         }
         return new Value(lhs.asBoolean() && rhs.asBoolean());
     }
@@ -297,7 +297,7 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
         Value rhs = this.visit(ctx.expression(1));
 
         if (!lhs.isBoolean() || !rhs.isBoolean()) {
-            throw new KebabException(ctx);
+            throw new LangntException(ctx);
         }
         return new Value(lhs.asBoolean() || rhs.asBoolean());
     }
@@ -327,7 +327,7 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
             }
             return new Value(false);
         }
-        throw new KebabException(ctx);
+        throw new LangntException(ctx);
     }
 
     // Number                                   #numberExpression
@@ -357,7 +357,7 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
         for (LangntParser.ExpressionContext ec : indexes) {
             Value idx = this.visit(ec);
             if (!idx.isNumber() || (!val.isList() && !val.isString())) {
-                throw new KebabException(ec.start, "Could not resolve indexes on: '%s' at: %s", val, idx);
+                throw new LangntException(ec.start, "Could not resolve indexes on: '%s' at: %s", val, idx);
             }
             int i = idx.asDouble().intValue();
             if (val.isString()) {
@@ -371,19 +371,19 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
 
     private void setAtIndex(ParserRuleContext ctx, List<LangntParser.ExpressionContext> indexes, Value val, Value newVal) {
         if (!val.isList()) {
-            throw new KebabException(ctx);
+            throw new LangntException(ctx);
         }
         // TODO some more list size checking in here
         for (int i = 0; i < indexes.size() - 1; i++) {
             Value idx = this.visit(indexes.get(i));
             if (!idx.isNumber()) {
-                throw new KebabException(ctx);
+                throw new LangntException(ctx);
             }
             val = val.asList().get(idx.asDouble().intValue());
         }
         Value idx = this.visit(indexes.get(indexes.size() - 1));
         if (!idx.isNumber()) {
-            throw new KebabException(ctx);
+            throw new LangntException(ctx);
         }
         val.asList().set(idx.asDouble().intValue(), newVal);
     }
@@ -489,7 +489,7 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
      * Assignment/creation of a variable.
      * <pre>
      * assignment
-     * : 'keb' Identifier indexes? ':' expression
+     * : 'var' Identifier indexes? ':' expression
      * ;
      * </pre>
      */
@@ -535,13 +535,13 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
             // Try to get a purely optional function.
             return function.invoke(params, functions, scope);
         }
-        throw new KebabException(ctx);
+        throw new LangntException(ctx);
     }
 
     /**
      * Printing of variables.
      * <pre>
-     * | Show '(' expression ')'
+     * | Print '(' expression ')'
      * </pre>
      */
     @Override
@@ -553,7 +553,7 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
     /**
      * Printing of stuff, multiline.
      * <pre>
-     * | ShowL (('(' expression ')') | '()')
+     * | Println (('(' expression ')') | '()')
      * </pre>
      */
     @Override
@@ -572,7 +572,7 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
         Value value = this.visit(ctx.expression());
 
         if (!value.isBoolean()) {
-            throw new KebabException(ctx);
+            throw new LangntException(ctx);
         }
 
         if (!value.asBoolean()) {
@@ -595,7 +595,7 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
             return new Value(value.asList().size());
         }
 
-        throw new KebabException(ctx);
+        throw new LangntException(ctx);
     }
 
     /**
@@ -677,7 +677,7 @@ public class MainVisitor extends LangntBaseVisitor<Value> {
 
         Value iterate = this.visit(ctx.expression());
         if (!iterate.isString() && !iterate.isList()) {
-            throw new KebabException(ctx.start, "Cannot iterate a non-string or a non-list in a _loop");
+            throw new LangntException(ctx.start, "Cannot iterate a non-string or a non-list in a _loop");
         }
 
         // Loop inner scope identifier.

@@ -10,7 +10,7 @@ public class Assert {
 
     public static void notNull(Object object, String message, Object... args) {
         if (object == null) {
-            throw new KebabException(message, args);
+            throw new LangntException(message, args);
         }
     }
 }

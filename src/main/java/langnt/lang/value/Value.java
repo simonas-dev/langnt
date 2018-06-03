@@ -1,7 +1,7 @@
 package langnt.lang.value;
 
 import langnt.util.Assert;
-import langnt.util.KebabException;
+import langnt.util.LangntException;
 
 import java.util.List;
 
@@ -50,7 +50,7 @@ public class Value implements Comparable<Value> {
         } else if (this.isString() && that.isString()) {
             return this.asString().compareTo(that.asString());
         } else {
-            throw new KebabException("Cannot compare: '%s' to: '%s'", this, that);
+            throw new LangntException("Cannot compare: '%s' to: '%s'", this, that);
         }
     }
 
@@ -112,12 +112,12 @@ public class Value implements Comparable<Value> {
      */
     private void validate() {
         if (!(isBoolean() || isList() || isNumber() || isString())) {
-            throw new KebabException("Got invalid type: %s", value.getClass());
+            throw new LangntException("Got invalid type: %s", value.getClass());
         }
     }
 
     /**
-     * Get the pure value of this kebab value wrapper.
+     * Get the pure value of this value wrapper.
      *
      * @return pure value.
      */
@@ -128,7 +128,7 @@ public class Value implements Comparable<Value> {
     @Override
     public boolean equals(Object other) {
         if (this == VOID || other == VOID) {
-            throw new KebabException("Cannot use VOID: %s ==/!= %s", this, other);
+            throw new LangntException("Cannot use VOID: %s ==/!= %s", this, other);
         }
         if (this == other) {
             return true;

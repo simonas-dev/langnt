@@ -3,19 +3,14 @@ package langnt.util;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.Token;
 
-/**
- * Generic exception for the Kebab language.
- */
-public class KebabException extends RuntimeException {
+public class LangntException extends RuntimeException {
 
     /**
-     * Create a descriptive exception with line details where the exception occurred.
-     *
-     * @param token   token start which caused the exception.
-     * @param message exception message.
-     * @param args    message args.
+     * @param token   token which caused the exception.
+     * @param message exception message text
+     * @param args    message arguments
      */
-    public KebabException(Token token, String message, Object... args) {
+    public LangntException(Token token, String message, Object... args) {
         this("Error("
                 + token.getLine()
                 + ", "
@@ -24,10 +19,7 @@ public class KebabException extends RuntimeException {
                 + String.format(message, args));
     }
 
-    /**
-     * A generic exception with just a message.
-     */
-    public KebabException(String message, Object... args) {
+    public LangntException(String message, Object... args) {
         super(String.format(message, args));
     }
 
@@ -36,7 +28,7 @@ public class KebabException extends RuntimeException {
      *
      * @param context where the exception was thrown.
      */
-    public KebabException(ParserRuleContext context) {
+    public LangntException(ParserRuleContext context) {
         this(context.start, String.format("Illegal expression: %s", context.getText()));
     }
 }

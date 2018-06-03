@@ -7,4 +7,4 @@ NOTCODE Default args.
        sampleFunction('Not default')
 
        NOTCODE Default call.
-       kebab()
+       sampleFunction()

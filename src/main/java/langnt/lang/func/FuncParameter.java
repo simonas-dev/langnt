@@ -11,8 +11,9 @@ public class FuncParameter {
     private final String identifier;
     private final boolean optional;
 
-    public FuncParameter(String identifier,
-                         LangntParser.ExpressionContext context) {
+    public FuncParameter(
+            String identifier,
+            LangntParser.ExpressionContext context) {
 
         this.identifier = identifier;
         this.context = context;

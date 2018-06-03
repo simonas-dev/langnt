@@ -55,11 +55,11 @@ functionCall
 /*
     A complete if statement.
 
-    _if(...) {
+    if(...) {
 
-    } _elif(...) {
+    } ifnt(...) {
 
-    } _el {
+    } wat {
 
     }
 */
@@ -67,17 +67,17 @@ completeIfStatement
  : ifStatement elseIfStatement* elseStatement? Close
  ;
 
-// _if
+// if
 ifStatement
  : If '(' expression ')' Open block
  ;
 
-// } _elif {
+// } ifnt {
 elseIfStatement
  : Close ElseIf '(' expression ')' Open block
  ;
 
-// } _el {
+// } wat {
 elseStatement
  : Close Else Open block
  ;
@@ -85,10 +85,10 @@ elseStatement
 /*
     Delcare a function, with args and no args.
 
-    _func test(a, b : 3) {
+    fu test(a, b : 3) {
     }
 
-    _fun test() {
+    fu test() {
     }
 */
 functionDeclaration
@@ -98,7 +98,7 @@ functionDeclaration
 /*
     A for-each like loop for strings and lists.
 
-    _each(a : 'abc) {
+    each(a : 'abc) {
         // loop stuff...
     }
 */
@@ -109,8 +109,8 @@ eachLoopStatement
 /*
     A simple while type loop.
 
-    keb a: 0
-    _loop(a < 10) {
+    var a: 0
+    loop(a < 10) {
         a: a + 1
     }
 */
@@ -229,7 +229,7 @@ Comma       : ',';
 QMark       : '?';
 Colon       : ':';
 
-// Yes = true, no = false.
+// Yes = true, yesnt = false.
 Bool
  : 'yes'
  | 'yesnt'

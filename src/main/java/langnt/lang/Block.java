@@ -1,7 +1,7 @@
 package langnt.lang;
 
 import langnt.lang.value.Value;
-import langnt.util.KebabException;
+import langnt.util.LangntException;
 import org.antlr.v4.runtime.Token;
 
 import java.util.HashMap;
@@ -46,7 +46,7 @@ public class Block {
         if (resolve(variable) != null) {
 
             // Do not re-assign a variable by default.
-            throw new KebabException(token, "Variable '%s' already declared in this scope",
+            throw new LangntException(token, "Variable '%s' already declared in this scope",
                     variable);
 
         } else {
@@ -65,7 +65,7 @@ public class Block {
     public void remove(Token token, String variable) {
         Value value = variables.get(variable);
         if (value == null) {
-            throw new KebabException(token, "Variable: '%s' does not exist", variable);
+            throw new LangntException(token, "Variable: '%s' does not exist", variable);
         }
         variables.remove(variable);
     }
@@ -97,7 +97,7 @@ public class Block {
         } else {
 
             // The variable was not declared in this scope.
-            throw new KebabException(token, "Variable '%s' is not declared in this scope",
+            throw new LangntException(token, "Variable '%s' is not declared in this scope",
                     variable);
         }
     }

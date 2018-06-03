@@ -5,7 +5,7 @@ import langnt.lang.Block;
 import langnt.lang.MainVisitor;
 import langnt.lang.value.Value;
 import langnt.lang.value.ReturnValue;
-import langnt.util.KebabException;
+import langnt.util.LangntException;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.util.List;
@@ -19,10 +19,11 @@ public class Func {
 
     private final int realParameterCount;
 
-    public Func(List<FuncParameter> parameters,
-                String identifier,
-                ParseTree block,
-                int realParameterCount) {
+    public Func(
+            List<FuncParameter> parameters,
+            String identifier,
+            ParseTree block,
+            int realParameterCount) {
 
         this.parameters = parameters;
         this.identifier = identifier;
@@ -36,14 +37,15 @@ public class Func {
      * @param params    function parameters.
      * @param functions functions that this function refers to.
      * @param scope     scope of the function.
-     * @return kebab value.
+     * @return value.
      */
-    public Value invoke(List<LangntParser.ExpressionContext> params,
-                        Map<String, Func> functions,
-                        Block scope) {
+    public Value invoke(
+            List<LangntParser.ExpressionContext> params,
+            Map<String, Func> functions,
+            Block scope) {
 
         if (params.size() > params.size()) {
-            throw new KebabException("Invalid parameter count of on function: %s", identifier);
+            throw new LangntException("Invalid parameter count of on function: %s", identifier);
         }
 
         // Block of the function.

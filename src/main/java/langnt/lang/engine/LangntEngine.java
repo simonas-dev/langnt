@@ -20,7 +20,7 @@ public class LangntEngine {
     private final Block scope;
 
     /**
-     * Main kebab engine constructor from char stream.
+     * Main engine constructor from char stream.
      *
      * @param charStream input stream of the code.
      */
@@ -37,7 +37,7 @@ public class LangntEngine {
     }
 
     /**
-     * Rune the kebab engine!
+     * Run the engine!
      *
      * @return value from the script.
      */
@@ -47,7 +47,7 @@ public class LangntEngine {
     }
 
     /**
-     * Initialize the kebab engine by providing a file location.
+     * Initialize the engine by providing a file location.
      *
      * @param file file location.
      */

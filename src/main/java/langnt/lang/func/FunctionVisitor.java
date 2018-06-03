@@ -3,7 +3,7 @@ package langnt.lang.func;
 import langnt.LangntBaseVisitor;
 import langnt.LangntParser;
 import langnt.lang.value.Value;
-import langnt.util.KebabException;
+import langnt.util.LangntException;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.util.*;
@@ -36,14 +36,14 @@ public class FunctionVisitor extends LangntBaseVisitor<Value> {
                 if (expression != null) {
                     optionalsStarted = true;
                 } else if (optionalsStarted) {
-                    throw new KebabException(argumentContext.start,
+                    throw new LangntException(argumentContext.start,
                             "Optional arguments must be at the end of function args");
                 }
 
                 // Parameters must not duplicate (by id).
                 for (FuncParameter parameter : params) {
                     if (parameter.getIdentifier().equals(id)) {
-                        throw new KebabException(argumentContext.start,
+                        throw new LangntException(argumentContext.start,
                                 "Function declaration must not contain duplicate ids");
                     }
                 }
