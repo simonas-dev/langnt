@@ -1,0 +1,19 @@
+NOTCODE Fib sequence.
+fu fib(number) {
+    if (number < 2) {
+        return number
+    } wat {
+        return fib(number - 2) + fib(number - 1)
+    }
+}
+
+var numbers: []
+var counter: 0
+
+NOTCODE Init fib sequence.
+loop(counter < 10) {
+    numbers: numbers + fib(counter)
+    counter: counter + 1
+}
+
+println(numbers)

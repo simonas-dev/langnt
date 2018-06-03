@@ -1,0 +1,22 @@
+NOTCODE If statements
+
+var test: yes
+if (test) {
+    println('Yep')
+}
+
+test: yesnt
+if (test) {
+    println('Yep')
+} wat {
+    println('!Yep')
+}
+
+test: 5
+if (test == 4) {
+    println('Four')
+} ifnt (test == 5) {
+    println('Five')
+} wat {
+    println('None')
+}

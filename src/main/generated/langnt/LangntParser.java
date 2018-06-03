@@ -19,7 +19,7 @@ public class LangntParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		Open=1, Close=2, Keb=3, Return=4, If=5, Else=6, ElseIf=7, Show=8, ShowL=9, 
+		Open=1, Close=2, Var=3, Return=4, If=5, Else=6, ElseIf=7, Print=8, PrintLine=9, 
 		EachLoop=10, Loop=11, Func=12, Input=13, Assert=14, Size=15, In=16, Empty=17, 
 		Or=18, And=19, Equals=20, NEquals=21, GTEquals=22, LTEquals=23, Pow=24, 
 		Excl=25, GT=26, LT=27, Add=28, Subtract=29, Multiply=30, Divide=31, Modulus=32, 
@@ -41,15 +41,15 @@ public class LangntParser extends Parser {
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "'{'", "'}'", "'keb'", "'_ret'", "'_if'", "'_el'", "'_elif'", "'show'", 
-		"'showl'", "'_each'", "'_loop'", "'_func'", "'input'", "'assert'", "'size'", 
+		null, "'{'", "'}'", "'var'", "'return'", "'if'", "'wat'", "'ifnt'", "'print'", 
+		"'println'", "'each'", "'loop'", "'fu'", "'input'", "'assert'", "'size'", 
 		"'in'", "'empty'", "'||'", "'&&'", "'=='", "'!='", "'>='", "'<='", "'^'", 
 		"'!'", "'>'", "'<'", "'+'", "'-'", "'*'", "'/'", "'%'", "'['", "']'", 
 		"'('", "')'", "';'", "'='", "','", "'?'", "':'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, "Open", "Close", "Keb", "Return", "If", "Else", "ElseIf", "Show", 
-		"ShowL", "EachLoop", "Loop", "Func", "Input", "Assert", "Size", "In", 
+		null, "Open", "Close", "Var", "Return", "If", "Else", "ElseIf", "Print", 
+		"PrintLine", "EachLoop", "Loop", "Func", "Input", "Assert", "Size", "In", 
 		"Empty", "Or", "And", "Equals", "NEquals", "GTEquals", "LTEquals", "Pow", 
 		"Excl", "GT", "LT", "Add", "Subtract", "Multiply", "Divide", "Modulus", 
 		"OBracket", "CBracket", "OParen", "CParen", "SColon", "Assign", "Comma", 
@@ -198,14 +198,14 @@ public class LangntParser extends Parser {
 			setState(45);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Keb) | (1L << If) | (1L << Show) | (1L << ShowL) | (1L << Loop) | (1L << Func) | (1L << Assert) | (1L << Size) | (1L << Identifier))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Var) | (1L << If) | (1L << Print) | (1L << PrintLine) | (1L << Loop) | (1L << Func) | (1L << Assert) | (1L << Size) | (1L << Identifier))) != 0)) {
 				{
 				setState(43);
 				switch (_input.LA(1)) {
-				case Keb:
+				case Var:
 				case If:
-				case Show:
-				case ShowL:
+				case Print:
+				case PrintLine:
 				case Loop:
 				case Assert:
 				case Size:
@@ -353,7 +353,7 @@ public class LangntParser extends Parser {
 	}
 
 	public static class AssignmentContext extends ParserRuleContext {
-		public TerminalNode Keb() { return getToken(LangntParser.Keb, 0); }
+		public TerminalNode Var() { return getToken(LangntParser.Var, 0); }
 		public TerminalNode Identifier() { return getToken(LangntParser.Identifier, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
@@ -391,7 +391,7 @@ public class LangntParser extends Parser {
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(60);
-				match(Keb);
+				match(Var);
 				setState(61);
 				match(Identifier);
 				setState(63);
@@ -413,7 +413,7 @@ public class LangntParser extends Parser {
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(67);
-				match(Keb);
+				match(Var);
 				setState(68);
 				match(Identifier);
 				setState(70);
@@ -554,7 +554,7 @@ public class LangntParser extends Parser {
 		}
 	}
 	public static class ShowFunctionCallContext extends FunctionCallContext {
-		public TerminalNode Show() { return getToken(LangntParser.Show, 0); }
+		public TerminalNode Print() { return getToken(LangntParser.Print, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
@@ -594,7 +594,7 @@ public class LangntParser extends Parser {
 		}
 	}
 	public static class ShowLineFunctionCallContext extends FunctionCallContext {
-		public TerminalNode ShowL() { return getToken(LangntParser.ShowL, 0); }
+		public TerminalNode PrintLine() { return getToken(LangntParser.PrintLine, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
@@ -631,7 +631,7 @@ public class LangntParser extends Parser {
 				match(OParen);
 				setState(84);
 				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Show) | (1L << ShowL) | (1L << Input) | (1L << Assert) | (1L << Size) | (1L << Empty) | (1L << Excl) | (1L << Subtract) | (1L << OBracket) | (1L << OParen) | (1L << Bool) | (1L << Number) | (1L << Identifier) | (1L << String))) != 0)) {
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Print) | (1L << PrintLine) | (1L << Input) | (1L << Assert) | (1L << Size) | (1L << Empty) | (1L << Excl) | (1L << Subtract) | (1L << OBracket) | (1L << OParen) | (1L << Bool) | (1L << Number) | (1L << Identifier) | (1L << String))) != 0)) {
 					{
 					setState(83);
 					expressionList();
@@ -642,12 +642,12 @@ public class LangntParser extends Parser {
 				match(CParen);
 				}
 				break;
-			case Show:
+			case Print:
 				_localctx = new ShowFunctionCallContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(87);
-				match(Show);
+				match(Print);
 				setState(88);
 				match(OParen);
 				setState(89);
@@ -656,17 +656,17 @@ public class LangntParser extends Parser {
 				match(CParen);
 				}
 				break;
-			case ShowL:
+			case PrintLine:
 				_localctx = new ShowLineFunctionCallContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(92);
-				match(ShowL);
+				match(PrintLine);
 				setState(93);
 				match(OParen);
 				setState(95);
 				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Show) | (1L << ShowL) | (1L << Input) | (1L << Assert) | (1L << Size) | (1L << Empty) | (1L << Excl) | (1L << Subtract) | (1L << OBracket) | (1L << OParen) | (1L << Bool) | (1L << Number) | (1L << Identifier) | (1L << String))) != 0)) {
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Print) | (1L << PrintLine) | (1L << Input) | (1L << Assert) | (1L << Size) | (1L << Empty) | (1L << Excl) | (1L << Subtract) | (1L << OBracket) | (1L << OParen) | (1L << Bool) | (1L << Number) | (1L << Identifier) | (1L << String))) != 0)) {
 					{
 					setState(94);
 					expression(0);
@@ -2331,7 +2331,7 @@ public class LangntParser extends Parser {
 			match(OBracket);
 			setState(283);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Show) | (1L << ShowL) | (1L << Input) | (1L << Assert) | (1L << Size) | (1L << Empty) | (1L << Excl) | (1L << Subtract) | (1L << OBracket) | (1L << OParen) | (1L << Bool) | (1L << Number) | (1L << Identifier) | (1L << String))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Print) | (1L << PrintLine) | (1L << Input) | (1L << Assert) | (1L << Size) | (1L << Empty) | (1L << Excl) | (1L << Subtract) | (1L << OBracket) | (1L << OParen) | (1L << Bool) | (1L << Number) | (1L << Identifier) | (1L << String))) != 0)) {
 				{
 				setState(282);
 				expressionList();

@@ -1,0 +1,10 @@
+NOTCODE Default args.
+       fu sampleFunction(message: 'I\'m default') {
+           println(message)
+       }
+
+       NOTCODE Non-default call.
+       sampleFunction('Not default')
+
+       NOTCODE Default call.
+       kebab()

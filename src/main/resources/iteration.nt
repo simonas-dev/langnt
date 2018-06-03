@@ -1,0 +1,22 @@
+NOTCODE Loopz.
+
+var loopMe: 'very well made language! 5 🙏 🙏 🙏'
+loop(s : loopMe) {
+    print(s)
+}
+println()
+
+loopMe: [1, 2, 3, 4, 'arrays support multiple types!']
+loop(l : loopMe) {
+    print(l + ' ')
+}
+
+println()
+
+loopMe: 0
+loop(loopMe < 10) {
+    print(loopMe + ' ')
+    loopMe: loopMe + 1
+}
+
+println()

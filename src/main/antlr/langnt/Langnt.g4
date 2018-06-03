@@ -13,7 +13,7 @@ block
  : (statement | functionDeclaration)* (Return expression)?
  ;
 
-// A generate statement, for example assignment keb a: 1
+// A generate statement, for example assignment var a: 1
 statement
  : assignment
  | reAssignment
@@ -26,18 +26,18 @@ statement
 /*
     Assign a value to a variable.
 
-    keb a: 1
-    keb b
+    var a: 1
+    var b
 */
 assignment
- : Keb Identifier indexes? ':' expression
- | Keb Identifier indexes?
+ : Var Identifier indexes? ':' expression
+ | Var Identifier indexes?
  ;
 
 /*
     Re-assign an existing variable value.
 
-    keb a: 1
+    var a: 1
     a: yes
 */
 reAssignment
@@ -45,11 +45,11 @@ reAssignment
  ;
 
 functionCall
- : Identifier '(' expressionList? ')' #identifierFunctionCall
- | Show       '(' expression ')'      #showFunctionCall
- | ShowL      '(' expression? ')'     #showLineFunctionCall
- | Assert     '(' expression ')'      #assertFunctionCall
- | Size       '(' expression ')'      #sizeFunctionCall
+ : Identifier   '(' expressionList? ')' #identifierFunctionCall
+ | Print        '(' expression ')'      #showFunctionCall
+ | PrintLine    '(' expression? ')'     #showLineFunctionCall
+ | Assert       '(' expression ')'      #assertFunctionCall
+ | Size         '(' expression ')'      #sizeFunctionCall
  ;
 
 /*
@@ -175,64 +175,64 @@ argument
  ;
 
 // General tokens.
-Open     : '{';
-Close    : '}';
-Keb      :  'keb';
-Return   : '_ret';
+Open        : '{';
+Close       : '}';
+Var         : 'var';
+Return      : 'return';
 
 // If statements.
-If       : '_if';
-Else     : '_el';
-ElseIf   : '_elif';
+If          : 'if';
+Else        : 'wat';
+ElseIf      : 'ifnt';
 
 // Printing of variables and stuff.
-Show     : 'show';
-ShowL    : 'showl';
+Print       : 'print';
+PrintLine   : 'println';
 
-// Loops: foreach and simple loop.
-EachLoop : '_each';
-Loop     : '_loop';
+// Loops : foreach and simple loop.
+EachLoop    : 'each';
+Loop        : 'loop';
 
 // Function stuff.
-Func     : '_func';
+Func        : 'fu';
 
 // todo sort out
-Input    : 'input';
-Assert   : 'assert';
-Size     : 'size';
-In       : 'in';
-Empty    : 'empty';
+Input       : 'input';
+Assert      : 'assert';
+Size        : 'size';
+In          : 'in';
+Empty       : 'empty';
 
 // Generic operations and misc tokens.
-Or       : '||';
-And      : '&&';
-Equals   : '==';
-NEquals  : '!=';
-GTEquals : '>=';
-LTEquals : '<=';
-Pow      : '^';
-Excl     : '!';
-GT       : '>';
-LT       : '<';
-Add      : '+';
-Subtract : '-';
-Multiply : '*';
-Divide   : '/';
-Modulus  : '%';
-OBracket : '[';
-CBracket : ']';
-OParen   : '(';
-CParen   : ')';
-SColon   : ';';
-Assign   : '=';
-Comma    : ',';
-QMark    : '?';
-Colon    : ':';
+Or          : '||';
+And         : '&&';
+Equals      : '==';
+NEquals     : '!=';
+GTEquals    : '>=';
+LTEquals    : '<=';
+Pow         : '^';
+Excl        : '!';
+GT          : '>';
+LT          : '<';
+Add         : '+';
+Subtract    : '-';
+Multiply    : '*';
+Divide      : '/';
+Modulus     : '%';
+OBracket    : '[';
+CBracket    : ']';
+OParen      : '(';
+CParen      : ')';
+SColon      : ';';
+Assign      : '=';
+Comma       : ',';
+QMark       : '?';
+Colon       : ':';
 
 // Yes = true, no = false.
 Bool
  : 'yes'
- | 'no'
+ | 'yesnt'
  ;
 
 // All numbers are of double type.
@@ -252,7 +252,7 @@ String
 
 // Comment -> @ Comment goes here.
 Comment
- : ('@' ~[\r\n]*) -> skip
+ : ('NOTCODE' ~[\r\n]*) -> skip
  ;
 
 // Ignore spaces.
