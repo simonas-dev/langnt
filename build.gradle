@@ -1,0 +1,46 @@
+group 'langnt'
+
+apply plugin: 'java'
+apply plugin: 'antlr'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    antlr 'org.antlr:antlr4:4.5'
+}
+
+ext {
+    generatedDir = 'src/main/generated'
+}
+
+clean {
+    delete rootProject.ext.generatedDir
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'langnt.Main'
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir rootProject.ext.generatedDir
+        }
+    }
+}
+
+generateGrammarSource {
+    arguments += '-visitor'
+    outputDirectory = new File("${project.rootDir}/${rootProject.ext.generatedDir}".toString())
+}
