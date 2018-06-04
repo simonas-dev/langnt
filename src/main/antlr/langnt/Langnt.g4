@@ -247,7 +247,7 @@ Identifier
 
 // String, 'someString "Inner"'
 String
- : ['] (~['\r\n] | '\\\\' | '\\\'')* [']
+ : ['] (~['\r\n] | '\\\\' | '\\\'')* ['']
  ;
 
 // Comment -> @ Comment goes here.
